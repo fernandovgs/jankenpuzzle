@@ -59,7 +59,9 @@ def criarTabuleiro(r, c, tabuleiro):
 #	coluna_atual:	coluna da peça sendo trabalhada
 #	tabuleiro:		tabuleiro do jan-ken-puzzle em jogo
 #
-def janKenPuzzle(n_linhas, n_colunas, n_pecas, n_finais, resultado, linha_atual, coluna_atual, tabuleiro):
+def janKenPuzzle(n_linhas, n_colunas, n_pecas, n_finais, resultado, linha_atual, coluna_atual, tabuleiro, dict1, dict2):
+	print ("Chamada")
+
 	#caso base 1: a posição é vazia. Não faz nada
 	if (tabuleiro[linha_atual][coluna_atual] == 0):
 		return
@@ -97,23 +99,21 @@ def janKenPuzzle(n_linhas, n_colunas, n_pecas, n_finais, resultado, linha_atual,
 					tabuleiro[linha_atual][coluna_atual] = 0				#atualiza a posição
 					tabuleiro[linha_atual][coluna_atual + 1] = peca_atual	#atualiza a posição adjacente
 
-					#Testa a porra toda tudo de novo (merda ineficiente do caralho)
-                    for i in range(n_linhas):
-						for j in range(n_colunas):
-								tupla = tuple({i,j})
-                                #Verificando se ja calculamos a operaçao antes
-                                if(tupla in dict1):
-                                    if(dict1.get(tupla) in dict2):
-                                        if(dict1.get(tupla) == tabuleiro):
-                                            #Passamos os valores
-                                            tabuleiro = dict2.get(tuple(dict1.get(tupla)))
-                                else:
-                                    #Realizar Operaçao
-                                    tabuleiro_to_save = tabuleiro
-                                    janKenPuzzle(n_linhas, n_colunas, n_pecas - 1, n_finais, resultado, i, j, tabuleiro)
-                                    #Salvar os resultados no dict
-                                    dict1[tupla] = tabuleiro_to_save
-                                    dict2[tuple(tabuleiro_to_save)] = tabuleiro
+					#Testa tudo de novo
+					# tupla = tuple({i,j})
+                    #Verificando se ja calculamos a operaçao antes
+					# if(tupla in dict1):
+					# 	if(dict1.get(tupla) in dict2):
+					# 		if(dict1.get(tupla) == tabuleiro):
+					# 			#Passamos os valores
+					# 			tabuleiro = dict2.get(tuple(dict1.get(tupla)))
+					# else:
+						#Realizar Operaçao
+						# tabuleiro_to_save = tabuleiro
+					janKenPuzzle(n_linhas, n_colunas, n_pecas - 1, n_finais, resultado, 0, 0, tabuleiro, dict1, dict2)
+						#Salvar os resultados no dict
+						# dict1[tupla] = tabuleiro_to_save
+						# dict2[tuple(tabuleiro_to_save)] = tabuleiro
 
 					tabuleiro[linha_atual][coluna_atual] = peca_atual	#recupera a posição
 					tabuleiro[linha_atual][coluna_atual + 1] = peca_adj	#recupera a posição adjacente
@@ -131,23 +131,21 @@ def janKenPuzzle(n_linhas, n_colunas, n_pecas, n_finais, resultado, linha_atual,
 					tabuleiro[linha_atual][coluna_atual] = 0				#atualiza a posição
 					tabuleiro[linha_atual + 1][coluna_atual] = peca_atual	#atualiza a posição adjacente
 					
-					#Testa a porra toda tudo de novo (merda ineficiente do caralho)
-                    for i in range(n_linhas):
-                        for j in range(n_colunas):
-                            tupla = tuple({i,j})
-                            #Verificando se ja calculamos a operaçao antes
-                            if(tupla in dict1):
-                                if(dict1.get(tupla) in dict2):
-                                    if(dict1.get(tupla) == tabuleiro):
-                                        #Passamos os valores
-                                        tabuleiro = dict2.get(tuple(dict1.get(tupla)))
-                            else:
-                                #Realizar Operaçao
-                                tabuleiro_to_save = tabuleiro
-                                janKenPuzzle(n_linhas, n_colunas, n_pecas - 1, n_finais, resultado, i, j, tabuleiro)
-                                #Salvar os resultados no dict
-                                dict1[tupla] = tabuleiro_to_save
-                                dict2[tuple(tabuleiro_to_save)] = tabuleiro
+					#Testa tudo de novo
+					# tupla = tuple({i,j})
+					# #Verificando se ja calculamos a operaçao antes
+					# if(tupla in dict1):
+					# 	if(dict1.get(tupla) in dict2):
+					# 		if(dict1.get(tupla) == tabuleiro):
+					# 			#Passamos os valores
+					# 			tabuleiro = dict2.get(tuple(dict1.get(tupla)))
+						# else:
+							#Realizar Operaçao
+							# tabuleiro_to_save = tabuleiro
+					janKenPuzzle(n_linhas, n_colunas, n_pecas - 1, n_finais, resultado, 0, 0, tabuleiro, dict1, dict2)
+							#Salvar os resultados no dict
+							# dict1[tupla] = tabuleiro_to_save
+							# dict2[tuple(tabuleiro_to_save)] = tabuleiro
 
 					tabuleiro[linha_atual][coluna_atual] = peca_atual	#recupera a posição
 					tabuleiro[linha_atual + 1][coluna_atual] = peca_adj	#recupera a posição adjacente
@@ -165,23 +163,21 @@ def janKenPuzzle(n_linhas, n_colunas, n_pecas, n_finais, resultado, linha_atual,
 					tabuleiro[linha_atual][coluna_atual] = 0				#atualiza a posição
 					tabuleiro[linha_atual][coluna_atual - 1] = peca_atual	#atualiza a posição adjacente
 					
-					#Testa a porra toda tudo de novo (merda ineficiente do caralho)
-					for i in range(n_linhas):
-						for j in range(n_colunas):
-                            tupla = tuple({i,j})
-                            #Verificando se ja calculamos a operaçao antes
-                            if(tupla in dict1):
-                                if(dict1.get(tupla) in dict2):
-                                    if(dict1.get(tupla) == tabuleiro):
-                                        #Passamos os valores
-                                        tabuleiro = dict2.get(tuple(dict1.get(tupla)))
-                            else:
-                                #Realizar Operaçao
-                                tabuleiro_to_save = tabuleiro
-                                janKenPuzzle(n_linhas, n_colunas, n_pecas - 1, n_finais, resultado, i, j, tabuleiro)
-                                #Salvar os resultados no dict
-                                dict1[tupla] = tabuleiro_to_save
-                                dict2[tuple(tabuleiro_to_save)] = tabuleiro
+					#Testa tudo de novo
+					# tupla = tuple({i,j})
+					#Verificando se ja calculamos a operaçao antes
+					# if(tupla in dict1):
+					# 	if(dict1.get(tupla) in dict2):
+					# 		if(dict1.get(tupla) == tabuleiro):
+					# 			#Passamos os valores
+					# 			tabuleiro = dict2.get(tuple(dict1.get(tupla)))
+					# else:
+						#Realizar Operaçao
+						# tabuleiro_to_save = tabuleiro
+					janKenPuzzle(n_linhas, n_colunas, n_pecas - 1, n_finais, resultado, 0, 0, tabuleiro, dict1, dict2)
+						#Salvar os resultados no dict
+						# dict1[tupla] = tabuleiro_to_save
+						# dict2[tuple(tabuleiro_to_save)] = tabuleiro
 
 					
 					tabuleiro[linha_atual][coluna_atual] = peca_atual	#recupera a posição
@@ -200,27 +196,35 @@ def janKenPuzzle(n_linhas, n_colunas, n_pecas, n_finais, resultado, linha_atual,
 					tabuleiro[linha_atual][coluna_atual] = 0				#atualiza a posição
 					tabuleiro[linha_atual - 1][coluna_atual] = peca_atual	#atualiza a posição adjacente
 
-					#Testa a porra toda tudo de novo (merda ineficiente do caralho)
-					for i in range(n_linhas):
-						for j in range(n_colunas):
-                            tupla = tuple({i,j})
-                            #Verificando se ja calculamos a operaçao antes
-                            if(tupla in dict1):
-                                if(dict1.get(tupla) in dict2):
-                                    if(dict1.get(tupla) == tabuleiro):
-                                        #Passamos os valores
-                                        tabuleiro = dict2.get(tuple(dict1.get(tupla)))
-                            else:
-                                #Realizar Operaçao
-                                tabuleiro_to_save = tabuleiro
-                                janKenPuzzle(n_linhas, n_colunas, n_pecas - 1, n_finais, resultado, i, j, tabuleiro)
-                                #Salvar os resultados no dict
-                                dict1[tupla] = tabuleiro_to_save
-                                dict2[tuple(tabuleiro_to_save)] = tabuleiro
+					#Testa tudo de novo
+					# tupla = tuple({i,j})
+					#Verificando se ja calculamos a operaçao antes
+					# if(tupla in dict1):
+					# 	if(dict1.get(tupla) in dict2):
+					# 		if(dict1.get(tupla) == tabuleiro):
+					# 			#Passamos os valores
+					# 			tabuleiro = dict2.get(tuple(dict1.get(tupla)))
+					# else:
+						#Realizar Operaçao
+						# tabuleiro_to_save = tabuleiro
+					janKenPuzzle(n_linhas, n_colunas, n_pecas - 1, n_finais, resultado, 0, 0, tabuleiro, dict1, dict2)
+						#Salvar os resultados no dict
+						# dict1[tupla] = tabuleiro_to_save
+						# dict2[tuple(tabuleiro_to_save)] = tabuleiro
 					
 					tabuleiro[linha_atual][coluna_atual] = peca_atual	#recupera a posição
 					tabuleiro[linha_atual - 1][coluna_atual] = peca_adj	#recupera a posição adjacente
 
+
+	#Chamada recursiva para as próximas posições
+	if ((n_linhas - 1) == linha_atual and (n_colunas - 1) == coluna_atual):
+		return
+
+	elif ((n_colunas - 1) == coluna_atual):
+		janKenPuzzle(n_linhas, n_colunas, n_pecas, n_finais, resultado, linha_atual + 1, 0, tabuleiro, dict1, dict2)
+
+	else:
+		janKenPuzzle(n_linhas, n_colunas, n_pecas, n_finais, resultado, linha_atual, coluna_atual + 1, tabuleiro, dict1, dict2)
 
 # verificarResultadoDistinto(resultado, linha_atual, coluna_atual, peca, n_finais): verifica se
 # 	um dado resultado encontrado do jogo é distinto dos demais.
@@ -326,14 +330,12 @@ def main():
 	n_finais = [0, 0]		#número de finais (possíveis [0] e distintos [1])
     
     #Dicionario (Linha, Coluna) -> Tabuleiro[]
-    dict1 = dict()
+	dict1 = dict()
     #Dicionario Tabuleiro[] - Resultado
-    dict2 = dict()
+	dict2 = dict()
 
-	#backtracking - jan ken puzzle, começando pela posição [i][j] do tabuleiro
-	for i in range(r):
-		for j in range(c):
-			janKenPuzzle(r, c, n_pecas, n_finais, resultado, i, j, tabuleiro)
+	#DP - jan ken puzzle, começando pela posição [0][0] do tabuleiro
+	janKenPuzzle(r, c, n_pecas, n_finais, resultado, 0, 0, tabuleiro, dict1, dict2)
 
 	#Ordenando a lista de resultados distintos, com os seguintes critérios:
 	#	linha: critério primário
