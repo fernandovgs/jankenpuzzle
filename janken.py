@@ -98,9 +98,22 @@ def janKenPuzzle(n_linhas, n_colunas, n_pecas, n_finais, resultado, linha_atual,
 					tabuleiro[linha_atual][coluna_atual + 1] = peca_atual	#atualiza a posição adjacente
 
 					#Testa a porra toda tudo de novo (merda ineficiente do caralho)
-					for i in range(n_linhas):
+                    for i in range(n_linhas):
 						for j in range(n_colunas):
-								janKenPuzzle(n_linhas, n_colunas, n_pecas - 1, n_finais, resultado, i, j, tabuleiro)
+								tupla = tuple({i,j})
+                                #Verificando se ja calculamos a operaçao antes
+                                if(tupla in dict1):
+                                    if(dict1.get(tupla) in dict2):
+                                        if(dict1.get(tupla) == tabuleiro):
+                                            #Passamos os valores
+                                            tabuleiro = dict2.get(tuple(dict1.get(tupla)))
+                                else:
+                                    #Realizar Operaçao
+                                    tabuleiro_to_save = tabuleiro
+                                    janKenPuzzle(n_linhas, n_colunas, n_pecas - 1, n_finais, resultado, i, j, tabuleiro)
+                                    #Salvar os resultados no dict
+                                    dict1[tupla] = tabuleiro_to_save
+                                    dict2[tuple(tabuleiro_to_save)] = tabuleiro
 
 					tabuleiro[linha_atual][coluna_atual] = peca_atual	#recupera a posição
 					tabuleiro[linha_atual][coluna_atual + 1] = peca_adj	#recupera a posição adjacente
@@ -119,11 +132,23 @@ def janKenPuzzle(n_linhas, n_colunas, n_pecas, n_finais, resultado, linha_atual,
 					tabuleiro[linha_atual + 1][coluna_atual] = peca_atual	#atualiza a posição adjacente
 					
 					#Testa a porra toda tudo de novo (merda ineficiente do caralho)
-					for i in range(n_linhas):
-						for j in range(n_colunas):
-								janKenPuzzle(n_linhas, n_colunas, n_pecas - 1, n_finais, resultado, i, j, tabuleiro)
+                    for i in range(n_linhas):
+                        for j in range(n_colunas):
+                            tupla = tuple({i,j})
+                            #Verificando se ja calculamos a operaçao antes
+                            if(tupla in dict1):
+                                if(dict1.get(tupla) in dict2):
+                                    if(dict1.get(tupla) == tabuleiro):
+                                        #Passamos os valores
+                                        tabuleiro = dict2.get(tuple(dict1.get(tupla)))
+                            else:
+                                #Realizar Operaçao
+                                tabuleiro_to_save = tabuleiro
+                                janKenPuzzle(n_linhas, n_colunas, n_pecas - 1, n_finais, resultado, i, j, tabuleiro)
+                                #Salvar os resultados no dict
+                                dict1[tupla] = tabuleiro_to_save
+                                dict2[tuple(tabuleiro_to_save)] = tabuleiro
 
-					
 					tabuleiro[linha_atual][coluna_atual] = peca_atual	#recupera a posição
 					tabuleiro[linha_atual + 1][coluna_atual] = peca_adj	#recupera a posição adjacente
 
@@ -143,7 +168,20 @@ def janKenPuzzle(n_linhas, n_colunas, n_pecas, n_finais, resultado, linha_atual,
 					#Testa a porra toda tudo de novo (merda ineficiente do caralho)
 					for i in range(n_linhas):
 						for j in range(n_colunas):
-								janKenPuzzle(n_linhas, n_colunas, n_pecas - 1, n_finais, resultado, i, j, tabuleiro)
+                            tupla = tuple({i,j})
+                            #Verificando se ja calculamos a operaçao antes
+                            if(tupla in dict1):
+                                if(dict1.get(tupla) in dict2):
+                                    if(dict1.get(tupla) == tabuleiro):
+                                        #Passamos os valores
+                                        tabuleiro = dict2.get(tuple(dict1.get(tupla)))
+                            else:
+                                #Realizar Operaçao
+                                tabuleiro_to_save = tabuleiro
+                                janKenPuzzle(n_linhas, n_colunas, n_pecas - 1, n_finais, resultado, i, j, tabuleiro)
+                                #Salvar os resultados no dict
+                                dict1[tupla] = tabuleiro_to_save
+                                dict2[tuple(tabuleiro_to_save)] = tabuleiro
 
 					
 					tabuleiro[linha_atual][coluna_atual] = peca_atual	#recupera a posição
@@ -165,7 +203,20 @@ def janKenPuzzle(n_linhas, n_colunas, n_pecas, n_finais, resultado, linha_atual,
 					#Testa a porra toda tudo de novo (merda ineficiente do caralho)
 					for i in range(n_linhas):
 						for j in range(n_colunas):
-								janKenPuzzle(n_linhas, n_colunas, n_pecas - 1, n_finais, resultado, i, j, tabuleiro)
+                            tupla = tuple({i,j})
+                            #Verificando se ja calculamos a operaçao antes
+                            if(tupla in dict1):
+                                if(dict1.get(tupla) in dict2):
+                                    if(dict1.get(tupla) == tabuleiro):
+                                        #Passamos os valores
+                                        tabuleiro = dict2.get(tuple(dict1.get(tupla)))
+                            else:
+                                #Realizar Operaçao
+                                tabuleiro_to_save = tabuleiro
+                                janKenPuzzle(n_linhas, n_colunas, n_pecas - 1, n_finais, resultado, i, j, tabuleiro)
+                                #Salvar os resultados no dict
+                                dict1[tupla] = tabuleiro_to_save
+                                dict2[tuple(tabuleiro_to_save)] = tabuleiro
 					
 					tabuleiro[linha_atual][coluna_atual] = peca_atual	#recupera a posição
 					tabuleiro[linha_atual - 1][coluna_atual] = peca_adj	#recupera a posição adjacente
@@ -273,6 +324,11 @@ def main():
 	resultado = []
 
 	n_finais = [0, 0]		#número de finais (possíveis [0] e distintos [1])
+    
+    #Dicionario (Linha, Coluna) -> Tabuleiro[]
+    dict1 = dict()
+    #Dicionario Tabuleiro[] - Resultado
+    dict2 = dict()
 
 	#backtracking - jan ken puzzle, começando pela posição [i][j] do tabuleiro
 	for i in range(r):
@@ -294,3 +350,4 @@ def main():
 
 #roda o programa
 main()
+
